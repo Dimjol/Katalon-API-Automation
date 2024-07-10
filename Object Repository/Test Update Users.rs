@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebServiceRequestEntity>
    <description></description>
-   <name>Test Create Users</name>
+   <name>Test Update Users</name>
    <tag></tag>
-   <elementGuidId>7b966181-dbd6-4cbd-be46-0c826771ca17</elementGuidId>
+   <elementGuidId>bc8b79ff-8b5e-414b-a3f3-7ce56f361fca</elementGuidId>
    <selectorMethod>BASIC</selectorMethod>
    <smartLocatorEnabled>false</smartLocatorEnabled>
    <useRalativeImagePath>false</useRalativeImagePath>
@@ -12,7 +12,7 @@
    <followRedirects>false</followRedirects>
    <httpBody></httpBody>
    <httpBodyContent>{
-  &quot;text&quot;: &quot;{\n    \&quot;name\&quot;: \&quot;dimas\&quot;,\n    \&quot;job\&quot;: \&quot;leader\&quot;\n}&quot;,
+  &quot;text&quot;: &quot;{\n    \&quot;name\&quot;: \&quot;${userName}\&quot;,\n    \&quot;job\&quot;: \&quot;zion resident\&quot;\n}&quot;,
   &quot;contentType&quot;: &quot;application/json&quot;,
   &quot;charset&quot;: &quot;UTF-8&quot;
 }</httpBodyContent>
@@ -23,14 +23,14 @@
       <name>Content-Type</name>
       <type>Main</type>
       <value>application/json</value>
-      <webElementGuid>d3cdf734-02a2-4eb8-8955-d4f0ca386e67</webElementGuid>
+      <webElementGuid>cacc352d-f40a-41d4-92a1-7973445bd5bb</webElementGuid>
    </httpHeaderProperties>
    <katalonVersion>9.6.0</katalonVersion>
    <maxResponseSize>0</maxResponseSize>
    <migratedVersion>5.4.1</migratedVersion>
    <path></path>
-   <restRequestMethod>POST</restRequestMethod>
-   <restUrl>https://reqres.in/api/users</restUrl>
+   <restRequestMethod>PUT</restRequestMethod>
+   <restUrl>https://reqres.in/api/users/2</restUrl>
    <serviceType>RESTful</serviceType>
    <soapBody></soapBody>
    <soapHeader></soapHeader>
@@ -39,6 +39,13 @@
    <soapServiceFunction></soapServiceFunction>
    <socketTimeout>0</socketTimeout>
    <useServiceInfoFromWsdl>true</useServiceInfoFromWsdl>
+   <variables>
+      <defaultValue>GlobalVariable.userName</defaultValue>
+      <description></description>
+      <id>60be8177-e108-4f92-b986-37255d22520c</id>
+      <masked>false</masked>
+      <name>userName</name>
+   </variables>
    <verificationScript>import static org.assertj.core.api.Assertions.*
 
 import com.kms.katalon.core.testobject.RequestObject
@@ -51,6 +58,14 @@ import internal.GlobalVariable as GlobalVariable
 
 RequestObject request = WSResponseManager.getInstance().getCurrentRequest()
 
-ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()</verificationScript>
+ResponseObject response = WSResponseManager.getInstance().getCurrentResponse()
+
+
+WS.verifyResponseStatusCode(response, 200)
+
+assertThat(response.getStatusCode()).isEqualTo(200)
+
+
+WS.verifyElementPropertyValue(response, 'name', &quot;Michael&quot;)</verificationScript>
    <wsdlAddress></wsdlAddress>
 </WebServiceRequestEntity>
